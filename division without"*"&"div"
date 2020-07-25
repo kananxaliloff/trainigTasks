@@ -1,0 +1,45 @@
+package main
+
+import (
+	"fmt"
+	//"math"
+)
+
+func main() {
+	fmt.Println(division(500, 497))
+}
+
+//500/3=166
+//500/497=1
+//500/500=1
+//500/501=0
+
+func division(x, y int) int {
+	if x < y {
+		return 0
+	} else if y == 0 {
+		fmt.Println("division by 0 cannot be performed")
+		return 0
+	} else {
+		return bitShiftingfrom1(x, y)
+	}
+}
+func bitShiftingfrom1(x, y int) int {
+	count := 1
+	yCopy := y
+	sum := 0
+	for x >= y {
+		y = y << 1
+		count = count << 1
+	}
+	if x < y {
+		y = y >> 1
+		count = count >> 1
+		sum += count
+	}
+	for x-y >= yCopy {
+		return sum + bitShiftingfrom1(x-y, yCopy)
+	}
+
+	return sum
+}
